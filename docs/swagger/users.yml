@@ -1,0 +1,880 @@
+openapi: 3.0.3
+info:
+  title: BIOS Precision Medicine - Backend Docs
+  description: |-
+    Página de documentación
+  version: 1.0.0
+servers:
+  - url: https://http://127.0.0.1:3333/
+
+paths:
+  /data:
+    post:
+      tags:
+        - Datum
+      summary: Crea un nuevo paciente
+      operationId: createDatum
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Datum'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Datum'
+    get:
+        tags:
+          - Datum
+        summary: Lista todos los registros
+        operationId: indexdata
+        parameters:
+          - name: page
+            in: query
+            description: Página a consultar
+            required: false
+            schema:
+              type: integer
+          - name: per_page
+            in: query
+            description: Cantidad de elementos a consultar por página
+            required: false
+            schema:
+              type: integer
+          - name: param_id
+            in: query
+            description: Filtro. Dado el identificador de un parámetro obtiene los datos que están relacionados a este
+            required: false
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Datum'          
+              application/xml:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Datum'
+          '400':
+            description: Invalid status value
+  /data/{id}:
+    get:
+      tags:
+        - Datum
+      summary: Obtiene un parámetro por medio del identificador
+      description: ''
+      operationId: getDatumById
+      parameters:
+        - name: id
+          in: path
+          description: 'Identificador del parámetro a buscar'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Datum'          
+        '400':
+          description: Identificador inválido
+        '404':
+          description: Registro no encontrado
+    put:
+      tags:
+        - Datum
+      summary: Actualización de parámetro
+      operationId: updateDatum
+      parameters:
+        - name: id
+          in: path
+          description: identificador del registro a modificar
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Datum'
+      responses:
+        default:
+          description: successful operation
+    delete:
+      tags:
+        - Datum
+      summary: Elimina un registro
+      operationId: deleteDatum
+      parameters:
+        - name: id
+          in: path
+          description: identificador del registro a eliminar
+          required: true
+          schema:
+            type: integer
+      responses:
+        '400':
+          description: Datos inválidos
+        '404':
+          description: Registro no encontrado
+  /datum_sub_task_exam:
+    post:
+      tags:
+        - DatumSubTaskExam
+      summary: Crea un nuevo registro
+      operationId: createDatumSubTaskExam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatumSubTaskExam'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatumSubTaskExam'
+    get:
+        tags:
+          - DatumSubTaskExam
+        summary: Lista todos los registros
+        operationId: indexDatumSubTaskExam
+        parameters:
+          - name: page
+            in: query
+            description: Página a consultar
+            required: false
+            schema:
+              type: integer
+          - name: per_page
+            in: query
+            description: Cantidad de elementos a consultar por página
+            required: false
+            schema:
+              type: integer
+          - name: subtask_exam_id
+            in: query
+            description: Filtro. Dado el identificador de una subtarea_examen obtiene los datos que están relacionados a este
+            required: false
+            schema:
+              type: integer
+          - name: datum_id
+            in: query
+            description: Filtro. Dado el identificador de un dato que están relacionados a este
+            required: false
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DatumSubTaskExam'          
+              application/xml:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DatumSubTaskExam'
+          '400':
+            description: Invalid status value
+  /datum_sub_task_exam/{id}:
+    get:
+      tags:
+        - DatumSubTaskExam
+      summary: Obtiene un parámetro por medio del identificador
+      description: ''
+      operationId: getDatumSubTaskExamById
+      parameters:
+        - name: id
+          in: path
+          description: 'Identificador del parámetro a buscar'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatumSubTaskExam'          
+        '400':
+          description: Identificador inválido
+        '404':
+          description: Registro no encontrado
+    put:
+      tags:
+        - DatumSubTaskExam
+      summary: Actualización de parámetro
+      operationId: updateDatumSubTaskExam
+      parameters:
+        - name: id
+          in: path
+          description: identificador del registro a modificar
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatumSubTaskExam'
+      responses:
+        default:
+          description: successful operation
+    delete:
+      tags:
+        - DatumSubTaskExam
+      summary: Elimina un registro
+      operationId: deleteDatumSubTaskExam
+      parameters:
+        - name: id
+          in: path
+          description: identificador del registro a eliminar
+          required: true
+          schema:
+            type: integer
+      responses:
+        '400':
+          description: Datos inválidos
+        '404':
+          description: Registro no encontrado
+  /exams:
+    post:
+      tags:
+        - Exam
+      summary: Crea un nuevo examen
+      operationId: createExam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Exam'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exam'
+    get:
+        tags:
+          - Exam
+        summary: Lista todos los registros
+        operationId: indexexams
+        parameters:
+          - name: page
+            in: query
+            description: Página a consultar
+            required: false
+            schema:
+              type: integer
+          - name: per_page
+            in: query
+            description: Cantidad de elementos a consultar por página
+            required: false
+            schema:
+              type: integer
+          - name: patient_id
+            in: query
+            description: Filtro. Dado el  identificador de un paciente, filtra todos los exámenes relacionados
+            required: false
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Exam'          
+              application/xml:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Exam'
+          '400':
+            description: Invalid status value
+  /exams/{id}:
+    get:
+      tags:
+        - Exam
+      summary: Obtiene un parámetro por medio del identificador
+      description: ''
+      operationId: getExamById
+      parameters:
+        - name: id
+          in: path
+          description: 'Identificador del parámetro a buscar'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exam'          
+        '400':
+          description: Identificador inválido
+        '404':
+          description: Registro no encontrado
+    put:
+      tags:
+        - Exam
+      summary: Actualización de parámetro
+      operationId: updateExam
+      parameters:
+        - name: id
+          in: path
+          description: identificador del registro a modificar
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Exam'
+      responses:
+        default:
+          description: successful operation
+    delete:
+      tags:
+        - Exam
+      summary: Elimina un registro
+      operationId: deleteExam
+      parameters:
+        - name: id
+          in: path
+          description: identificador del registro a eliminar
+          required: true
+          schema:
+            type: integer
+      responses:
+        '400':
+          description: Datos inválidos
+        '404':
+          description: Registro no encontrado
+  /params:
+    post:
+      tags:
+        - Param
+      summary: Crea un nuevo parámetro
+      operationId: createParam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Param'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Param'
+    get:
+        tags:
+          - Param
+        summary: Lista todos los registros
+        operationId: indexParams
+        parameters:
+          - name: page
+            in: query
+            description: Página a consultar
+            required: false
+            schema:
+              type: integer
+          - name: per_page
+            in: query
+            description: Cantidad de elementos a consultar por página
+            required: false
+            schema:
+              type: integer
+          - name: sub_task_id
+            in: query
+            description: Filtro. Lista los parámetros que están asociados con una subtarea
+            required: false
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Param'          
+              application/xml:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Param'
+          '400':
+            description: Invalid status value
+  /params/{id}:
+    get:
+      tags:
+        - Param
+      summary: Obtiene un parámetro por medio del identificador
+      description: ''
+      operationId: getParamById
+      parameters:
+        - name: id
+          in: path
+          description: 'Identificador del parámetro a buscar'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Param'          
+        '400':
+          description: Identificador inválido
+        '404':
+          description: Registro no encontrado
+    put:
+      tags:
+        - Param
+      summary: Actualización de parámetro
+      operationId: updateParam
+      parameters:
+        - name: id
+          in: path
+          description: identificador del registro a modificar
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Param'
+      responses:
+        default:
+          description: successful operation
+    delete:
+      tags:
+        - Param
+      summary: Elimina un registro
+      operationId: deleteParam
+      parameters:
+        - name: id
+          in: path
+          description: identificador del registro a eliminar
+          required: true
+          schema:
+            type: integer
+      responses:
+        '400':
+          description: Datos inválidos
+        '404':
+          description: Registro no encontrado
+  /patients:
+    post:
+      tags:
+        - Patient
+      summary: Crea un nuevo paciente
+      operationId: createPatient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+    get:
+        tags:
+          - Patient
+        summary: Lista todos los registros
+        operationId: indexpatients
+        parameters:
+          - name: page
+            in: query
+            description: Página a consultar
+            required: false
+            schema:
+              type: integer
+          - name: per_page
+            in: query
+            description: Cantidad de elementos a consultar por página
+            required: false
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Patient'          
+              application/xml:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Patient'
+          '400':
+            description: Invalid status value
+  /patients/{id}:
+    get:
+      tags:
+        - Patient
+      summary: Obtiene un parámetro por medio del identificador
+      description: ''
+      operationId: getPatientById
+      parameters:
+        - name: id
+          in: path
+          description: 'Identificador del parámetro a buscar'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'          
+        '400':
+          description: Identificador inválido
+        '404':
+          description: Registro no encontrado
+    put:
+      tags:
+        - Patient
+      summary: Actualización de parámetro
+      operationId: updatePatient
+      parameters:
+        - name: id
+          in: path
+          description: identificador del registro a modificar
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      responses:
+        default:
+          description: successful operation
+    delete:
+      tags:
+        - Patient
+      summary: Elimina un registro
+      operationId: deletePatient
+      parameters:
+        - name: id
+          in: path
+          description: identificador del registro a eliminar
+          required: true
+          schema:
+            type: integer
+      responses:
+        '400':
+          description: Datos inválidos
+        '404':
+          description: Registro no encontrado
+  /subtasks-exam:
+    post:
+      tags:
+        - SubTaskExam
+      summary: Crea una nueva subtarea examen
+      operationId: createSubTaskExam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubTaskExam'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubTaskExam'
+    get:
+        tags:
+          - SubTaskExam
+        summary: Lista todos los registros
+        operationId: indexsubtasks-exam
+        parameters:
+          - name: page
+            in: query
+            description: Página a consultar
+            required: false
+            schema:
+              type: integer
+          - name: per_page
+            in: query
+            description: Cantidad de elementos a consultar por página
+            required: false
+            schema:
+              type: integer
+          - name: exam_id
+            in: query
+            description: Filtro. Dado el  identificador de un exámen, filtra todos los relacionados a este
+            required: false
+            schema:
+              type: integer
+          - name: subtask_id
+            in: query
+            description: Filtro. Dado el  identificador de una subtarea, filtra todos los relacionados a este
+            required: false
+            schema:
+              type: integer
+          - name: previous_subtask_exam_id
+            in: query
+            description: Filtro. Dado el  identificador de un registro previo, filtra todos los relacionados a este
+            required: false
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SubTaskExam'          
+              application/xml:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SubTaskExam'
+          '400':
+            description: Invalid status value
+  /subtasks-exam/{id}:
+    get:
+      tags:
+        - SubTaskExam
+      summary: Obtiene un parámetro por medio del identificador
+      description: ''
+      operationId: getSubTaskExamById
+      parameters:
+        - name: id
+          in: path
+          description: 'Identificador del parámetro a buscar'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubTaskExam'          
+        '400':
+          description: Identificador inválido
+        '404':
+          description: Registro no encontrado
+    put:
+      tags:
+        - SubTaskExam
+      summary: Actualización de parámetro
+      operationId: updateSubTaskExam
+      parameters:
+        - name: id
+          in: path
+          description: identificador del registro a modificar
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubTaskExam'
+      responses:
+        default:
+          description: successful operation
+    delete:
+      tags:
+        - SubTaskExam
+      summary: Elimina un registro
+      operationId: deleteSubTaskExam
+      parameters:
+        - name: id
+          in: path
+          description: identificador del registro a eliminar
+          required: true
+          schema:
+            type: integer
+      responses:
+        '400':
+          description: Datos inválidos
+        '404':
+          description: Registro no encontrado
+components:
+  schemas:
+    Datum:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        value:
+          type: string
+          example: "102"
+        param_id:
+          type: integer
+          example: 1
+    DatumSubTaskExam:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        type:
+          type: string
+          example: "input"
+        subtask_exam_id:
+          type: integer
+          example: 1
+        datum_id:
+          type: integer
+          example: 1
+    Exam:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Test 1"
+        patient_id:
+          type: integer
+          example: 1
+    Param:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        sub_task_id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "size"
+        type:
+          type: string
+          example: "int"
+        optional:
+          type: boolean
+          example: true
+        default_value:
+          type: string
+          example: "0"
+    Patient:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Maria"
+        lastname:
+          type: string
+          example: "Ortiz"
+        birth_year:
+          type: string
+          example: "2001-08-27"
+        document:
+          type: string
+          example: 1
+    
+    SubTask:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Filtrado"
+        description:
+          type: string
+          example: "Tarea de filtrado de cadenas"
+        order:
+          type: integer
+          example: 1
+        command:
+          type: string
+          example: "python filter.py"
+        task_id:
+          type: integer
+          example: 1
+    SubTaskExam:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        previous_subtask_exam_id:
+          type: integer
+          example: 1
+        exam_id:
+          type: integer
+          example: 1
+        subtask_id:
+          type: integer
+          example: 1
+        finished_at:
+          type: string
+          example: "2023-07-21 16:43:50"
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Filtrado"
+        description:
+          type: string
+          example: "Tarea de filtrado de cadenas"
+        order:
+          type: integer
+          example: 1
+        process_id:
+          type: integer
+          example: 1

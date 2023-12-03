@@ -1,0 +1,26 @@
+version: '3'
+services:
+  adonis:
+  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: adonis-container
+    ports:
+      - 3334:3333
+    networks:
+      - mynetwork
+
+  mysql:
+    image: mysql
+    container_name: mysql-container-bios
+    environment:
+      MYSQL_ROOT_PASSWORD: dba-bios-2023*
+      MYSQL_DATABASE: bios-precision-medicine
+    ports:
+      - 3307:3306
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
